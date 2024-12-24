@@ -62,3 +62,68 @@ class PokemonListResult {
     return data;
   }
 }
+
+class Pokemon {
+  // List<Abilities>? abilities;
+  int? height;
+  int? id;
+  List<Moves>? moves;
+  String? name;
+  // Ability? species;
+  Sprite? sprites;
+  // List<Stats>? stats;
+  int? weight;
+
+  Pokemon(
+      {
+      // this.abilities,
+      this.height,
+      this.id,
+      this.moves,
+      this.name,
+      // this.species,
+      this.sprites,
+      // this.stats,
+      this.weight});
+
+  Pokemon.fromJson(Map<String, dynamic> json) {
+    height = json["height"];
+    id = json['id'];
+    name = json['name'];
+    weight = json['weight'];
+    sprites = Sprite.fromJson(json['sprites']);
+    if (json['moves'] != null) {
+      moves = <Moves>[];
+      json['moves'].forEach((v) {
+        moves!.add(Moves.fromJson(v));
+      });
+    }
+
+    // if (json['results'] != null) {
+    //   results = <PokemonListResult>[];
+    //   json['results'].forEach((v) {
+    //     results!.add(PokemonListResult.fromJson(v));
+    //   });
+    // }
+  }
+}
+
+class Moves {
+  String? name;
+  String? url;
+
+  Moves({this.name, this.url});
+
+  Moves.fromJson(Map<String, dynamic> json) {
+    name = json["height"];
+    url = json['id'];
+  }
+}
+
+class Sprite {
+  String? frontDefault;
+  Sprite({this.frontDefault});
+  Sprite.fromJson(Map<String, dynamic> json) {
+    frontDefault = json["front_default"];
+  }
+}
